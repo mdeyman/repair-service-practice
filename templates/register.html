@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="card">
+    <h2>Регистрация</h2>
+
+    <form method="post">
+        <label>Логин</label>
+        <input type="text" name="login" required>
+
+        <label>Пароль</label>
+        <input type="password" name="password" required minlength="8">
+
+        <label>ФИО</label>
+        <input type="text" name="full_name" required>
+
+        <label>Телефон</label>
+        <input type="text" name="phone" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+</section>
+{% endblock %}

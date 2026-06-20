@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="card">
+    <h2>Панель администратора</h2>
+    <p>Администратор может просматривать заявки пользователей и изменять их статус.</p>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Клиент</th>
+            <th>Техника</th>
+            <th>Описание</th>
+            <th>Связь</th>
+            <th>Статус</th>
+            <th>Изменить</th>
+        </tr>
+
+        {% for item in all_requests %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.full_name }}</td>
+            <td>{{ item.device_type }}</td>
+            <td>{{ item.problem_description }}</td>
+            <td>{{ item.contact_method }}</td>
+            <td>{{ item.status_name }}</td>
+            <td>
+                <form method="post" class="inline-form">
+                    <input type="hidden" name="request_id" value="{{ item.id }}">
+                    <select name="status_id">
+                        {% for status in statuses %}
+                            <option value="{{ status.id }}">{{ status.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">OK</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+{% endblock %}

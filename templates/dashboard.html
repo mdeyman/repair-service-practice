@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="card">
+    <h2>Кабинет пользователя</h2>
+    <p>Пользователь: {{ session.get("full_name") }}</p>
+
+    <h3>Создание заявки</h3>
+    <form method="post">
+        <label>Тип техники</label>
+        <input type="text" name="device_type" placeholder="Ноутбук, телефон, принтер" required>
+
+        <label>Описание проблемы</label>
+        <textarea name="problem_description" required></textarea>
+
+        <label>Способ связи</label>
+        <select name="contact_method" required>
+            <option value="Телефон">Телефон</option>
+            <option value="Email">Email</option>
+        </select>
+
+        <button type="submit">Создать заявку</button>
+    </form>
+</section>
+
+<section class="card">
+    <h3>Мои заявки</h3>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Техника</th>
+            <th>Описание</th>
+            <th>Связь</th>
+            <th>Статус</th>
+        </tr>
+        {% for item in requests_list %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.device_type }}</td>
+            <td>{{ item.problem_description }}</td>
+            <td>{{ item.contact_method }}</td>
+            <td>{{ item.status_name }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+<section class="card">
+    <h3>Примеры техники</h3>
+    <div class="slider">
+        <div class="slide active">Ноутбуки</div>
+        <div class="slide">Смартфоны</div>
+        <div class="slide">Планшеты</div>
+        <div class="slide">Принтеры</div>
+    </div>
+</section>
+{% endblock %}
